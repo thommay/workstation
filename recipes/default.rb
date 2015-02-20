@@ -53,10 +53,13 @@ end
 execute "rbenv install 2.2.0" do
   user homebrew_owner
   environment "PATH" => "#{hb_dir}/.rbenv/shims:#{hb_dir}/.rbenv/bin:#{ENV["PATH"]}"
+  not_if "test -d #{hb_dir}/.rbenv/versions/2.2.0"
 end
 
-execute "rake" do
-  user homebrew_owner
-  environment "PATH" => "#{hb_dir}/.rbenv/shims:#{hb_dir}/.rbenv/bin:#{ENV["PATH"]}"
-  cwd "#{hb_dir}/.dotfiles"
+%w{ dotfiles vim}.each do |dir|
+  execute "rake" do
+    user homebrew_owner
+    environment "PATH" => "#{hb_dir}/.rbenv/shims:#{hb_dir}/.rbenv/bin:#{ENV["PATH"]}"
+    cwd "#{hb_dir}/.#{dir}"
+  end
 end
