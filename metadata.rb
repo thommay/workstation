@@ -1,0 +1,6 @@
+name 'workstation'
+version '0.0.1'
+maintainer 'Thom May'
+depends 'macapps'
+depends 'mac_os_x'
+depends 'homebrew'
